@@ -92,7 +92,9 @@ svg {
 }
 
 .post__img {
-  max-height: 130vh;
+  height: 80vh;
+  max-width: 80%;
+  align-self: center;
   object-fit: contain;
   margin-bottom: 16px;
   border: 1px solid transparent;
@@ -101,6 +103,7 @@ svg {
 
 p {
   text-align: justify;
+  padding-right: 1rem;
 }
 
 .post__tags {

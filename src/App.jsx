@@ -28,18 +28,15 @@ function App() {
     if (token && (new Date() < new Date(token?.exp * 1e3))) {
       setModalActive(false)
       setAuth(true); 
-     
-        dispatch(getMyUser()).then(() => dispatch(fetchPosts()))
-      
-      
+      dispatch(getMyUser()).then(() => dispatch(fetchPosts())) 
     } else {
       setModalActive(true)
       navigate('/login')
     }
-  }, [ localStorage.getItem('token')]);
+  }, [ dispatch, localStorage.getItem('token')]);
 
   return (
-    <div className="App">
+    <>
       <Header />
       <main className='content'>
       {isAuthorized ?
@@ -66,7 +63,7 @@ function App() {
       }
       </main>
       <Footer />
-    </div>
+    </>
   );
 }
 

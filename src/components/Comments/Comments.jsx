@@ -8,14 +8,13 @@ import { BaseButton, SendButton } from "../Buttons/Buttons";
 
 export const Comments = ({ onSendComment, comments, onDeleteComment }) => {
 
+    const { data: user } = useSelector((s) => s.user)
+    const { register, handleSubmit, reset } = useForm({ mode: "onBlur" });
+    const [showForm, setShowForm] = useState();
     const timeOptions = {
     day: 'numeric',
     month: 'short', year: "numeric"
     }
-    const [showForm, setShowForm] = useState();
-    const { register, handleSubmit, reset } = useForm({ mode: "onBlur" });
-    const { data: user } = useSelector((s) => s.user)
-
     const CommentRegister = {
         required: {
             value: true,
@@ -29,8 +28,8 @@ export const Comments = ({ onSendComment, comments, onDeleteComment }) => {
         setShowForm(false)
     }
 
-    return (<>
-        <div>
+    return (
+        <>
             <div className={s.comments__controls}>
                 <h2>Комментарии</h2>
                 <BaseButton type="submit" variant="contained" onClick={() => setShowForm(true)}>Оставить комментарий</BaseButton>
@@ -60,6 +59,6 @@ export const Comments = ({ onSendComment, comments, onDeleteComment }) => {
                     </div>
                 )}
             </div>
-        </div>
-    </>)
+        </>
+    )
 }

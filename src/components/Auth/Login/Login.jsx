@@ -18,7 +18,6 @@ export const passwordRegister = {
         message: 'Пароль должен содержать минимум 8 символов, одну большую букву латинского алфавита и одну цифру'
     }
 }
-
 export const LoginForm = () => {
 
     const [type, setType] = useState(true)
@@ -26,7 +25,6 @@ export const LoginForm = () => {
     const dispatch = useDispatch();
     const { register, handleSubmit, formState: { errors } } = useForm({ mode: "onBlur" });
 
-    
     const sendData = useCallback(async data => {
         dispatch(signInProfile(data)).then(()=> navigate('/'));    
     }, [dispatch])

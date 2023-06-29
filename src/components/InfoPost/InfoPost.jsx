@@ -11,15 +11,15 @@ import { SendButton } from "../Buttons/Buttons";
 
 
 export const InfoPost = ({post, onPostLike, sendComment, onDeleteComment, modalActive, setModalActive, sendUpdatedPost}) => {
+    
+    const { data: user } = useSelector((s) => s.user)
+    const { register, handleSubmit, reset } = useForm({ mode: "onBlur" });
+    const [isLikedPost, setIsPostLike] = useState(false);
+    const [img, setImg] = useState(`${post.image}`);
     const timeOptions = {
         day: 'numeric',
         month: 'short', year: "numeric"
     }
-
-    const [isLikedPost, setIsPostLike] = useState(false);
-    const { data: user } = useSelector((s) => s.user)
-
-    const { register, handleSubmit, reset } = useForm({ mode: "onBlur" });
 
     useEffect(() => {
         const isLiked = post.likes.some(e => e === user?._id);
@@ -38,6 +38,10 @@ export const InfoPost = ({post, onPostLike, sendComment, onDeleteComment, modalA
         sendUpdatedPost(data);
         reset()
         setModalActive(false);
+    }
+
+    const handleChangeImg = (event) => {
+        setImg(event.target.value);
     }
     
     return (
@@ -63,11 +67,11 @@ export const InfoPost = ({post, onPostLike, sendComment, onDeleteComment, modalA
                     <div className="incontent" >
                         <h2>Редактирование поста</h2>
                         <form className=" form-example" onSubmit={handleSubmit(onSendUpdatedPost)}>
-                            <input className="form__input" placeholder='url картинки поста' type="text" {...register("image")} defaultValue={post.image}  />
-                            <img src={post.image} className="mb-2" width="100%" />
-                            <input className="form__input" placeholder='Заголовок поста' type="text" {...register("title")} defaultValue={post.title}  /> 
-                            <textarea className="form__input" placeholder='Текст поста' type="text" {...register("text")} defaultValue={post.text}  /> 
-                            <input className="form__input" placeholder='введите тэги через запятую' {...register("tags")} type="text" defaultValue={post.tags}  /> 
+                            <input className="form__input" placeholder='url картинки поста' type="text" {...register("image")} defaultValue={post.image} onChange={handleChangeImg} />
+                            <img src={img} className="post_imageURL" width="100%" />
+                            <input className="form__input" placeholder='Заголовок поста' type="text" {...register("title")} defaultValue={post.title} /> 
+                            <textarea className="form__input" placeholder='Текст поста' type="text" {...register("text")} defaultValue={post.text} /> 
+                            <input className="form__input" placeholder='введите тэги через запятую' {...register("tags")} type="text" defaultValue={post.tags} /> 
                             <SendButton variant="contained">Send</SendButton>
                         </form>
                     </div>

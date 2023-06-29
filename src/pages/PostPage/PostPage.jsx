@@ -8,8 +8,8 @@ import { fetchAddPostComment, fetchChangePostLike, fetchDeletePostComment, fetch
 export const PostPage = ({modalActive, setModalActive}) => {
     const { id } = useParams();
     const dispatch = useDispatch();
-    const user = useSelector(state => state.user.data);
     const { post } = useSelector((s) => s.posts)
+    const user = useSelector(state => state.user.data);
 
     useEffect(() => {
         if (id) {

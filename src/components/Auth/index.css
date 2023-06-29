@@ -46,3 +46,11 @@
 .auth__link:hover {
   opacity: 0.6;
 }
+
+.post_imageURL {
+  width: 100%;
+  max-height: 300px;
+  object-fit: contain;
+  border: 1px solid transparent;
+  border-radius: 2%;
+}

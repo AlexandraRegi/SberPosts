@@ -42,7 +42,7 @@ export const fetchUpdatedPost = createAsyncThunk(
     try {
       const updatedPost = await api.updatedPost(data._id, data);
       const state = arg.getState();
-      return arg.fulfillWithValue({ updatedPost });
+      return arg.fulfillWithValue({ updatedPost, allPosts: state.posts.posts });
     } catch (error) {
       return arg.rejectWithValue(error);
     }
@@ -119,36 +119,30 @@ const posts = createSlice({
   reducers: {},
   extraReducers: (builder) => {
 
-    // Получение списка постов
     builder.addCase(fetchPosts.fulfilled, (state, action) => {
       state.posts = (action.payload.posts) ?? [];
       state.loading = false;
     });
 
-    // Добавление нового поста
     builder.addCase(fetchAddNewPost.fulfilled, (state, action) => {
       state.posts = (action.payload.allPosts) ?? [];
       state.posts.unshift(action.payload.addNewPost);
       state.loading = false;
     });
 
-    // Обновление/изменение собственного поста
     builder.addCase(fetchUpdatedPost.fulfilled, (state, action) => {
       state.post = action.payload.updatedPost;
       state.loading = false;
     });
 
-    // Удаление собственного поста
     builder.addCase(fetchDeletePost.fulfilled, (state, action) => {
       state.posts = action.payload.allPosts.filter(e => e._id !== action.payload.deletePost._id);
       state.loading = false;
     });
 
-    // Изменение лайка на посте
     builder.addCase(fetchChangePostLike.fulfilled, (state, action) => {
       const updatedPostLike = action.payload.updatedPostLike;
       const wasLiked = action.payload.wasLiked;
-      // Обновление состояния поста
       state.posts = state.posts.map((e) =>
         e._id === updatedPostLike?._id ? updatedPostLike : e
       );
@@ -159,20 +153,17 @@ const posts = createSlice({
       }
     });
 
-    // Получение поста по id
     builder.addCase(fetchPostById.fulfilled, (state, action) => {
       state.post = (action.payload) ?? {};
       state.loading = false;
     });
 
-    // Добавление комментария
     builder.addCase(fetchAddPostComment.fulfilled, (state, action) => {
       state.post = action.payload.addPostComment;
       openNotification("success", "Успешно", "Ваш комментарий отправлен");
       state.loading = false;
     });
     
-    // Удаление комментария
     builder.addCase(fetchDeletePostComment.fulfilled, (state, action) => {
       state.post = action.payload.deletePostComment;
       state.loading = false;
