@@ -16,7 +16,8 @@ export const RegisterForm = () => {
     const { register, handleSubmit, formState: { errors } } = useForm({ mode: "onBlur" });
 
     const sendData = useCallback(async (data) => {
-        dispatch(registration(data).then(()=> navigate('/login')));
+        dispatch(registration(data));
+        navigate('/login')
     }, [dispatch])
 
     return (
@@ -28,7 +29,7 @@ export const RegisterForm = () => {
                     {errors?.email && <span> {errors?.email.message}</span>}
                 </div>
                 <div>
-                    <input className="form__input" type="number" {...register("group")} placeholder="group" />
+                    <input className="form__input" type="text" {...register("group")} placeholder="group" defaultValue="group-" />
                     {errors?.group && <span> {errors?.group.message}</span>}
                 </div>
                 <div className="form__pass">
