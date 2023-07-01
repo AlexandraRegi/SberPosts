@@ -41,7 +41,7 @@ export const PostListPage = ({modalActive, setModalActive}) => {
           const lastIndex = page * countCardOnPage;
           const startIndex = lastIndex - countCardOnPage;
             if (posts.length>0) {
-                const newPosts = posts.length>0 ? posts.slice(startIndex, lastIndex) : posts
+                const newPosts = posts.slice(startIndex, lastIndex);
                 setPostsOnPage(newPosts)
             }
         }
