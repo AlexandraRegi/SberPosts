@@ -24,6 +24,7 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(getMyUser()).then(() => dispatch(fetchPosts()))
     const token = parseJwt(localStorage.getItem('token'));
     if (token && (new Date() < new Date(token?.exp * 1e3))) {
       setModalActive(false)
