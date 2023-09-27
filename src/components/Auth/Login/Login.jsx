@@ -3,6 +3,8 @@ import { useForm } from 'react-hook-form';
 import '../index.css'
 import { Link, useNavigate } from "react-router-dom";
 import Button from '@mui/material/Button';
+import VisibilityTwoToneIcon from '@mui/icons-material/VisibilityTwoTone';
+import VisibilityOffTwoToneIcon from '@mui/icons-material/VisibilityOffTwoTone';
 import { useDispatch } from "react-redux";
 import { signInProfile } from '../../../storage/slices/authSlice'
 
@@ -39,7 +41,7 @@ export const LoginForm = () => {
                 </div>
                 <div className="form__pass">
                     <input className="form__input" type={!type ? 'password' : 'text'} {...register("password", { ...passwordRegister })} placeholder="password" />
-                    <span onClick={() => setType(!type)} className={`form__pass__icon`}>{type ? '0' : 'X'}</span>
+                    <span onClick={() => setType(!type)} className={`form__pass__icon`}>{type ? <VisibilityTwoToneIcon fontSize="small" /> : <VisibilityOffTwoToneIcon fontSize="small" />}</span>
                     {errors?.password && <span> {errors?.password.message}</span>}
                 </div>
                 <div className="auth__links">

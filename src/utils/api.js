@@ -12,20 +12,20 @@ class Api {
   getPostList() {
     return fetch(`${this.baseUrl}`, {
       method: "GET",
-      ...this.freshHeaders(),
+      headers: this.headers,
     }).then(onResponse).catch((err) => alert("ERROR", err));
   }
 
   getUserInfo() {
     return fetch(`https://api.react-learning.ru/users/me`, {
       method: "GET",
-      ...this.freshHeaders(),
+      headers: this.headers,
     }).then(onResponse).catch((err) => alert("ERROR", err));
   }
 
   updateUserInfo(data) {
     return fetch(`https://api.react-learning.ru/users/me`, {
-      ...this.freshHeaders(),
+      headers: this.headers,
       method: "PATCH",
       body: JSON.stringify(data),
     }).then(onResponse).catch((err) => alert("ERROR", err));
@@ -33,7 +33,7 @@ class Api {
 
   updateUserAvatar(data) {
     return fetch(`https://api.react-learning.ru/users/me/avatar`, {
-      ...this.freshHeaders(),
+      headers: this.headers,
       method: "PATCH",
       body: JSON.stringify(data),
     }).then(onResponse).catch((err) => alert("ERROR", err));
@@ -42,20 +42,20 @@ class Api {
   changePostLike(postId, isLiked) {
     return fetch(`${this.baseUrl}/likes/${postId}`, {
       method: isLiked ? "DELETE" : "PUT",
-      ...this.freshHeaders(),
+      headers: this.headers,
     }).then(onResponse).catch((err) => alert("ERROR", err));
   }
 
   getPostById(id) {
     return fetch(`${this.baseUrl}/${id}`, {
       method: "GET",
-      ...this.freshHeaders(),
+      headers: this.headers,
     }).then(onResponse).catch((err) => alert("ERROR", err));
   }
 
   addNewPost(data) {
     return fetch(`${this.baseUrl}`, {
-      ...this.freshHeaders(),
+      headers: this.headers,
       method: "POST",
       body: JSON.stringify(data),
     }).then(onResponse).catch((err) => alert("ERROR", err));
@@ -63,7 +63,7 @@ class Api {
 
   updatedPost(postId, data) {
     return fetch(`${this.baseUrl}/${postId}`, {
-      ...this.freshHeaders(),
+      headers: this.headers,
       method: "PATCH",
       body: JSON.stringify(data),
     }).then(onResponse).catch((err) => alert("ERROR", err));
@@ -71,14 +71,14 @@ class Api {
 
   deletePost(postId) {
     return fetch(`${this.baseUrl}/${postId}`, {
-      ...this.freshHeaders(),
+      headers: this.headers,
       method: "DELETE",
     }).then(onResponse).catch((err) => alert("ERROR", err));
   }
 
   addPostComment(postId, data) {
     return fetch(`${this.baseUrl}/comments/${postId}`, {
-      ...this.freshHeaders(),
+      headers: this.headers,
       method: "POST",
       body: JSON.stringify(data),
     }).then(onResponse).catch((err) => alert("ERROR", err));
@@ -86,7 +86,7 @@ class Api {
 
   deletePostComment(postId, commentId) {
     return fetch(`${this.baseUrl}/comments/${postId}/${commentId}`, {
-      ...this.freshHeaders(),
+      headers: this.headers,
       method: "DELETE",
     }).then(onResponse).catch((err) => alert("ERROR", err));
   }
