@@ -31,8 +31,8 @@ function App() {
       setAuth(true); 
       dispatch(getMyUser()).then(() => dispatch(fetchPosts())) 
     } else {
-      setModalActive(true)
-      navigate('/login')
+      //setModalActive(true)
+      //navigate('/login')
     }
   }, [ dispatch, localStorage.getItem('token')]);
 
